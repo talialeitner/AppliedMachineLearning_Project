@@ -66,7 +66,7 @@
     <p>
         <h1>Expiration Dates Reader</h1>
     </p>
-    <form enctype="multipart/form-data" action="/upload" method="post">
+    <form id='form_id' enctype="multipart/form-data" action="/upload" method="post">
         <div class="file-input">
             <img id="file-image" src="https://pic.onlinewebfonts.com/svg/img_80066.png" alt="Preview"  width="60" height="40" class="img">
             <input type="file" id="file" class="file" name="file1" onchange="loadFile(event)"/>
@@ -75,8 +75,28 @@
             <script>
                 var loadFile = function(event) {
                     var image = document.getElementById('uploadedImg');
-                    image.src = URL.createObjectURL(event.target.files[0]);
+                    var file = convertFile(event.target.files[0])
+                    image.src = URL.createObjectURL(file);
                 };
+                var convertFile = function(file) {
+                    console.log(file)
+                    if (file.type === "image/heic"){
+                        var data = new FormData()
+                        data.append('files', file)
+                        data.append('name', file.name)
+                        //covert by sending it to backend
+                        file = fetch("/convert")
+                                .then(function(response){
+                                    return response.json()
+                                })
+                                .then(function(res){
+                                    console.log('success')
+                                    console.log(res)
+                                })
+                    }
+                    return file
+                }
+
             </script>
         </div>
         
