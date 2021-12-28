@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+    <title>Expiration Dates Reader</title>
+</head>
+<style>
+    h1{
+        font-size: 48px;
+        text-shadow: -1px -1px #ff6ec4, 1px 1px #7873f5, -3px 0 4px #000;
+        font-family:"Segoe print", Arial, Helvetica, sans-serif;
+        color: #ff6ec4;
+        margin-left: auto;
+        margin-right: auto;
+        text-align:center;
+    }
+
+    .file {
+        opacity: 0;
+        width: 0.1px;
+        height: 0.1px;
+        position: absolute;       
+    }
+
+    .file-input label {
+        display: block;
+        position: relative;
+        width: 200px;
+        height: 50px;
+        border-radius: 25px;
+        background: linear-gradient(40deg, #ff6ec4, #7873f5);
+        box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+    }
+
+    .upload{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .uploadedImg{
+        width: auto;
+        height: 180px;
+        margin-top: 20px;
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0, 0.4);
+        border: 3px solid #f1f1f1;
+    }
+</style>
+<body>
+    <p>
+        <h1>Expiration Dates Reader</h1>
+    </p>
+    <form enctype="multipart/form-data" action="/upload" method="post">
+        <div class="file-input">
+            <img id="file-image" src="https://pic.onlinewebfonts.com/svg/img_80066.png" alt="Preview"  width="60" height="40" class="img">
+            <input type="file" id="file" class="file" name="file1" onchange="loadFile(event)"/>
+            <label for="file"> Select file</label>
+            <img id="uploadedImg" src="https://cdn-01.media-brady.com/store/stus/media/catalog/product/cache/4/image/85e4522595efc69f496374d01ef2bf13/1544628820/w/r/write-on-labels-75490-lg.png" alt="your image" class="uploadedImg"/>
+            <script>
+                var loadFile = function(event) {
+                    var image = document.getElementById('uploadedImg');
+                    image.src = URL.createObjectURL(event.target.files[0]);
+                };
+            </script>
+        </div>
+        
+        <br />  
+        <br />
+        <input type="submit" value="upload" class="upload" pointer;/>
+    </form>
+</body>
+</html>
