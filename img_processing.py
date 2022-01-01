@@ -130,16 +130,18 @@ def read_text(arr, boxes):
 
 
 def main():
-    # name = "exp1.jpg"
-    name = "DC59E429-245F-4665-9985-C4412825D03C_4_5005_c.jpeg"
+
+    name = "exp1.jpg"
+    # name = "Unknown.jpeg"
+    # name = "expTest.jpg" #kinda works but order doesnt. y+-1
 
     # pre proceesing -- play around with this some more
     image = cv2.imread(f'uploads/{name}') # example image
     arr = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     arr = cv2.blur(arr, (4,4))
     arr = cv2.GaussianBlur(arr, (3,3), 0)
-    # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    # arr = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 21, 10)
+    # gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    # arr = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 11, 10)
     # arr = cv2.GaussianBlur(arr, (7, 7), 0)
     # kernell = np.array([[0,-1,0], [-1,5,-1], [0,-1,0]])
     # arr = cv2.filter2D(src=arr, ddepth=-1, kernel=kernell)
@@ -147,10 +149,9 @@ def main():
     # get text boxes coords and sort them
     image, boxes = east_detect(arr)
     boxes = sorted(boxes, key = lambda x: [x[1], x[0]])
-
      # save the returned image
     image = Image.fromarray(image)
-    image.save(f'text_detection/processed2_{name}')
+    image.save(f'text_detection/processed_{name}')
 
     # read the text from the image --
     # arr is the array of the original image
@@ -158,4 +159,4 @@ def main():
     result = read_text(arr, boxes)
     return result
 
-main()
+print(main())
