@@ -129,6 +129,17 @@ def read_text(arr, boxes):
     return results
 
 
+def process_img(img):
+    arr = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    arr = cv2.blur(arr, (4,4))
+    arr = cv2.GaussianBlur(arr, (3,3), 0)
+    # gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    # arr = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 11, 10)
+    # arr = cv2.GaussianBlur(arr, (7, 7), 0)
+    # kernell = np.array([[0,-1,0], [-1,5,-1], [0,-1,0]])
+    # arr = cv2.filter2D(src=arr, ddepth=-1, kernel=kernell)
+    return arr
+
 def main():
 
     name = "exp1.jpg"
@@ -137,14 +148,7 @@ def main():
 
     # pre proceesing -- play around with this some more
     image = cv2.imread(f'uploads/{name}') # example image
-    arr = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-    arr = cv2.blur(arr, (4,4))
-    arr = cv2.GaussianBlur(arr, (3,3), 0)
-    # gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-    # arr = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 11, 10)
-    # arr = cv2.GaussianBlur(arr, (7, 7), 0)
-    # kernell = np.array([[0,-1,0], [-1,5,-1], [0,-1,0]])
-    # arr = cv2.filter2D(src=arr, ddepth=-1, kernel=kernell)
+    arr = process_img(image)
 
     # get text boxes coords and sort them
     image, boxes = east_detect(arr)
