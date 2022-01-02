@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+    <title>Expiration Dates Reader</title>
+</head>
+<style>
+    h1{
+        font-size: 48px;
+        text-shadow: -1px -1px #ff6ec4, 1px 1px #7873f5, -3px 0 4px #000;
+        font-family:"Segoe print", Arial, Helvetica, sans-serif;
+        color: #ff6ec4;
+        margin-left: auto;
+        margin-right: auto;
+        text-align:center;
+    }
+
+    img {
+        border: 1px solid rgb(236, 179, 208);
+        border-radius: 4px;
+        padding: 5px;
+        width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #result{
+        border-radius: 4px;
+        margin:auto;
+        margin-top: 20px;
+        text-align: center;
+        width: 40%;
+        background-color: black;
+        color: white;
+        font-size: larger;
+    }
+
+</style>
+<body>
+    <p>
+        <h1>Results</h1>
+    </p>
+    <img id = 'east_detect_img' src="{{path}}">
+    <p id='result'>{{result}}</p>
+    
+</body>
+</html>

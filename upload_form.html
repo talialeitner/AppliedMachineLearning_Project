@@ -15,6 +15,16 @@
         text-align:center;
     }
 
+    /* img {
+        border: 1px solid rgb(236, 179, 208);
+        border-radius: 4px;
+        padding: 5px;
+        width: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    } */
+
     .file {
         opacity: 0;
         width: 0.1px;
@@ -59,7 +69,11 @@
         margin-top: 20px;
         background-color: rgb(0,0,0); /* Fallback color */
         background-color: rgba(0,0,0, 0.4);
-        border: 3px solid #f1f1f1;
+        border: 3px solid;
+        padding: 5px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
 <body>
@@ -75,26 +89,36 @@
             <script>
                 var loadFile = function(event) {
                     var image = document.getElementById('uploadedImg');
-                    var file = convertFile(event.target.files[0])
-                    image.src = URL.createObjectURL(file);
+                    convertFile(event.target.files[0]).then(function(file) {
+                        var blob = URL.createObjectURL(file)
+                        image.src = blob;
+                        var input_ref = document.getElementById('file');
+                        var f = new File([file], input_ref.files[0].name.split(".")[0]+'.png', {type: 'image/png'});
+                        console.log(f)
+                        var container = new DataTransfer()
+                        container.items.add(f)
+                        input_ref.files = container.files
+                        console.log(input_ref.value)
+                    })
                 };
                 var convertFile = function(file) {
+
                     console.log(file)
                     if (file.type === "image/heic"){
                         var data = new FormData()
                         data.append('files', file)
                         data.append('name', file.name)
                         //covert by sending it to backend
-                        file = fetch("/convert")
+                        return fetch("/convert", {method: 'post', body: data})
                                 .then(function(response){
-                                    return response.json()
+                                    return response.blob()
                                 })
                                 .then(function(res){
-                                    console.log('success')
-                                    console.log(res)
+                                    return res
                                 })
                     }
-                    return file
+                    
+                    return Promise.resolve(file)
                 }
 
             </script>

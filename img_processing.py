@@ -140,9 +140,9 @@ def process_img(img):
     # arr = cv2.filter2D(src=arr, ddepth=-1, kernel=kernell)
     return arr
 
-def main():
+def image_to_text(name):
 
-    name = "exp1.jpg"
+    # name = "exp1.jpg"
     # name = "Unknown.jpeg"
     # name = "expTest.jpg" #kinda works but order doesnt. y+-1
 
@@ -163,4 +163,5 @@ def main():
     result = read_text(arr, boxes)
     return result
 
-print(main())
+if __name__ == 'main':
+    image_to_text()
